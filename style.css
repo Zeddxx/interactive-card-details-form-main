@@ -51,8 +51,8 @@ main{
     justify-content: flex-end;
 }
 .two-cards > div{
-    height: 10rem;
-    width: 18rem;
+    height: 11rem;
+    width: 20rem;
     /* position: relative; */
     border-radius: .4rem;
 }
@@ -78,7 +78,7 @@ main{
 }   
 .card-2{
     position: absolute;
-    top: 54%;
+    top: 60%;
     left: 0;
     background: url('./images/bg-card-front.png') no-repeat center;
     background-size: contain;
