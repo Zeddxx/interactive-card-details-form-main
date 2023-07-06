@@ -11,7 +11,7 @@ const cardExpYear = document.querySelector(".exp-year");
 const cvvInput = document.getElementById("cvv-number");
 const cvvOutput = document.querySelector(".cvv-number");
 const validateBtn = document.getElementById("btnMain");
-const cardSuccess = document.querySelector('.successfull-msg');
+const cardSuccess = document.querySelector(".successfull-msg");
 // Attach event listeners
 holderName.addEventListener("input", handleHolderNameInput);
 cardHolderNumber.addEventListener("input", handleCardNumberInput);
@@ -42,7 +42,7 @@ function handleHolderNameInput() {
 function handleCardNumberInput(event) {
   const key = event.key;
 
-  if (key === 'Backspace') {
+  if (key === "Backspace") {
     return; // Allow the user to delete characters
   }
 
@@ -55,7 +55,7 @@ function handleCardNumberInput(event) {
 
 let previousCardNumber = "";
 
-cardHolderNumber.addEventListener("input", function(event) {
+cardHolderNumber.addEventListener("input", function (event) {
   if (cardHolderNumber.value !== previousCardNumber) {
     previousCardNumber = cardHolderNumber.value;
     handleCardNumberInput(event);
@@ -70,10 +70,17 @@ function showNumber() {
     cardHolderNumber.style.border = `2px solid var(--error-red)`;
     cardHolderNumber.style.color = "red";
   } else if (/^[\d\s]+$/.test(cardHolderNumber.value)) {
-    cardNumber.innerText = cardHolderNumber.value;
-    errorNumber.innerText = "";
-    cardHolderNumber.style.color = "";
-    cardHolderNumber.style.border = `2px solid `;
+    var cardValue = parseInt(cardHolderNumber.value);
+    if (cardHolderNumber.value.length < 19) {
+      cardHolderNumber.style.border = `2px solid var(--error-red)`;
+      cardHolderNumber.style.color = "red";
+      errorNumber.innerText = "Must be 16 numbers";
+    } else {
+      cardNumber.innerText = cardHolderNumber.value;
+      errorNumber.innerText = "";
+      cardHolderNumber.style.color = "";
+      cardHolderNumber.style.border = `2px solid `;
+    }
   } else {
     cardNumber.innerText = "0000 0000 0000 0000";
     cardHolderNumber.style.border = `2px solid var(--error-red)`;
@@ -81,11 +88,6 @@ function showNumber() {
     errorNumber.innerText = "Wrong format, numbers only";
   }
 }
-
-
-
-
-
 
 function handleExpMonthInput() {
   let errorElement = document.querySelector(".exp-error");
@@ -102,13 +104,12 @@ function handleExpMonthInput() {
       expMonthInput.style.border = "2px solid red";
       errorElement.innerText = "Enter valid month";
       expMonthInput.style.color = "red";
-    } else if(monthValue < 10){
+    } else if (monthValue < 10) {
       cardExpMonth.innerText = `0${parseInt(expMonthInput.value)}`;
       expMonthInput.style.border = "2px solid";
       errorElement.innerText = "";
       expMonthInput.style.color = "";
-    }
-    else {
+    } else {
       cardExpMonth.innerText = expMonthInput.value;
       expMonthInput.style.border = "2px solid";
       errorElement.innerText = "";
@@ -162,7 +163,7 @@ function handleCvvInput() {
     cvvOutput.innerText = cvvInput.value;
     cvvInput.style.border = "2px solid ";
     errorElement.innerText = "";
-    cvvInput.style.color = ''
+    cvvInput.style.color = "";
   } else {
     cvvOutput.innerText = "000";
     cvvInput.style.border = "2px solid  var(--error-red)";
@@ -185,12 +186,12 @@ function validateInputs() {
     cvvInput.value !== "" &&
     /^[0-9\s]+$/.test(cardHolderNumber.value)
   ) {
-    cardSuccess.classList.add('success');
+    cardSuccess.classList.add("success");
   } else {
-    cardSuccess.classList.remove('success');
+    cardSuccess.classList.remove("success");
   }
 }
 
 function success() {
-  cardSuccess.classList.remove('success');
+  cardSuccess.classList.remove("success");
 }
