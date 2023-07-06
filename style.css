@@ -386,3 +386,15 @@ input::placeholder{
         right: 0;
     }
 }
+@media screen and (min-height : 225px){
+    .details{
+        margin-top: 10rem;
+    }
+    .successfull-msg{
+        top: 100%;
+        height: 80%;
+    }
+    .success{
+        top: 30%;
+    }
+}
