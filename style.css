@@ -78,7 +78,7 @@ main{
 }   
 .card-2{
     position: absolute;
-    bottom: -3rem;
+    top: 54%;
     left: 0;
     background: url('./images/bg-card-front.png') no-repeat center;
     background-size: contain;
