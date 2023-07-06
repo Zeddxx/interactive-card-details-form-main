@@ -386,7 +386,7 @@ input::placeholder{
         right: 0;
     }
 }
-@media screen and (min-height : 225px){
+@media screen and (height <= 455px){
     .details{
         margin-top: 10rem;
     }
