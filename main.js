@@ -12,6 +12,8 @@ const cvvInput = document.getElementById("cvv-number");
 const cvvOutput = document.querySelector(".cvv-number");
 const validateBtn = document.getElementById("btnMain");
 const cardSuccess = document.querySelector(".successfull-msg");
+const errorMessage = document.querySelector(".error-message");
+
 // Attach event listeners
 holderName.addEventListener("input", handleHolderNameInput);
 cardHolderNumber.addEventListener("input", handleCardNumberInput);
@@ -70,8 +72,8 @@ function showNumber() {
     cardHolderNumber.style.border = `2px solid var(--error-red)`;
     cardHolderNumber.style.color = "red";
   } else if (/^[\d\s]+$/.test(cardHolderNumber.value)) {
-    var cardValue = parseInt(cardHolderNumber.value);
     if (cardHolderNumber.value.length < 19) {
+      cardNumber.innerText = cardHolderNumber.value;
       cardHolderNumber.style.border = `2px solid var(--error-red)`;
       cardHolderNumber.style.color = "red";
       errorNumber.innerText = "Must be 16 numbers";
@@ -166,13 +168,15 @@ function handleCvvInput() {
     cvvInput.style.color = "";
   } else {
     cvvOutput.innerText = "000";
-    cvvInput.style.border = "2px solid  var(--error-red)";
+   cvvInput.style.border = "2px solid  var(--error-red)";
     errorElement.innerText = "Only numbers";
     cvvInput.style.color = "red";
   }
 }
 
-function validateInputs() {
+function validateInputs(event) {
+  event.preventDefault(); // Prevent the form from being submitted
+
   handleHolderNameInput();
   handleCardNumberInput(event);
   handleExpMonthInput();
@@ -187,11 +191,25 @@ function validateInputs() {
     /^[0-9\s]+$/.test(cardHolderNumber.value)
   ) {
     cardSuccess.classList.add("success");
+    // errorMessage.textContent = ""; // Clear any previous error message
   } else {
     cardSuccess.classList.remove("success");
+    alert("Invalid input. Please check the form fields.");
   }
 }
 
 function success() {
   cardSuccess.classList.remove("success");
+  // errorMessage.textContent = ""; // Clear any previous error message
+}
+
+// Reset the error message when inputs are changed
+holderName.addEventListener("input", resetErrorMessage);
+cardHolderNumber.addEventListener("input", resetErrorMessage);
+expMonthInput.addEventListener("input", resetErrorMessage);
+expYearInput.addEventListener("input", resetErrorMessage);
+cvvInput.addEventListener("input", resetErrorMessage);
+
+function resetErrorMessage() {
+  // errorMessage.textContent = "";
 }
